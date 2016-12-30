@@ -20,7 +20,7 @@ class StemTableViewController: UITableViewController {
             if stemDict.count > 0 {
                 for stem in stemDict[0] {
                     print("SVC myprint \(stemDict[0])")
-                    if stem.key != "name"{
+                    if stem.key != "name" && stem.key != "artist"{
                         stemList.append(stem.key)
                     }
                 }
@@ -48,7 +48,7 @@ class StemTableViewController: UITableViewController {
         // Dispose of any resources that can be recreated.
     }
 
-    var detailItem: Event? {
+    var detailItem: Song? {
         didSet {
             // Update the view.
             stemDict.remove(at: 0) //remove dummy object

@@ -6,12 +6,20 @@
         </attribute>
         <userInfo/>
     </entity>
-    <entity name="Songs" representedClassName="Songs" syncable="YES" codeGenerationType="class">
+    <entity name="Song" representedClassName="Song" codeGenerationType="class">
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="songs" toMany="YES" deletionRule="Cascade" destinationEntity="Stems" inverseName="songs" inverseEntity="Stems" syncable="YES"/>
+        <userInfo/>
+    </entity>
+    <entity name="Stems" representedClassName="Stems" syncable="YES" codeGenerationType="class">
         <attribute name="file" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="stem" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="songs" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Song" inverseName="songs" inverseEntity="Song" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Event" positionX="261" positionY="189" width="128" height="60"/>
-        <element name="Songs" positionX="261" positionY="198" width="128" height="75"/>
+        <element name="Event" positionX="106" positionY="129" width="128" height="58"/>
+        <element name="Song" positionX="106" positionY="207" width="128" height="88"/>
+        <element name="Stems" positionX="279" positionY="216" width="128" height="88"/>
     </elements>
 </model>
