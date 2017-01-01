@@ -13,12 +13,12 @@ var stemInPlayer:String? = nil
 
 var stemListforSongs = [Dictionary<String, String>()]
 
-
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
     var StemTableViewController: StemTableViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-    
+    var fetchedDict = [Dictionary<String, Any>()]
+    //var fetchedDict = Dictionary<String, Dictionary<String, Any>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,8 +52,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         insertNewSong(songDict: stemListforSongs[0] as NSDictionary)
         insertNewSong(songDict: stemListforSongs[1] as NSDictionary)
         
-        let fetchedDictionary = fetchSongsFromCoreData()
-        print("fetched Dic: ", fetchedDictionary)
+        self.fetchedDict = fetchSongsFromCoreData()
+        print("fetched Dic: ", self.fetchedDict.count)
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -111,9 +111,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
-    func fetchSongsFromCoreData(artist: String? = nil) -> Dictionary<String, Dictionary<String, Any>>{
+    func fetchSongsFromCoreData(artist: String? = nil) -> [Dictionary<String, Any>] {
         
-        var resultsDictionary = Dictionary<String, Dictionary<String, Any>>() // return dictionary variable
+        var resultsDictionary = [Dictionary<String, Any>()] // return dictionary variable
+        resultsDictionary.remove(at: 0)
         
         // Create Fetch Request
         let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
@@ -134,7 +135,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         do {
             let result = try self.managedObjectContext!.fetch(fetchRequest)
             for songObject in result {
-                let songKey = songObject.objectID.description //create unique key for the results dictionary
+                //let songID = songObject.objectID.description //create unique key for the results dictionary
+                
                 if let fetchedSong = songObject.value(forKey: "name"), let fetchedArtist = songObject.value(forKey: "artist"){
                     
                     var stemDict = Dictionary<String, String>()
@@ -142,9 +144,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     for stem in allStems {
                         stemDict[(stem as! Stems).name!] = (stem as! Stems).file!
                     }
-                    
+                    let cellID = "\(fetchedSong) - \(fetchedArtist)"
                     //setup the results dictionary
-                    resultsDictionary[songKey] = ["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict]
+                    resultsDictionary.append(["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict, "cellID": cellID])
                 }
             }
         } catch {
@@ -164,12 +166,23 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true
-                
+                //controller.stemDict.insert(self.fetchedDict[String(indexPath[1])]!, at: 0)
                 // set the stem list to the controller object
                 let selectedSongIndex:Int = indexPath[1]
                 if controller.stemDict.count == 0{
                     //print("MVC myprint \(stemListforSongs[selectedSongIndex])")
-                    controller.stemDict.insert(stemListforSongs[selectedSongIndex], at: 0)
+                    //print("MVC selected dict", self.fetchedDict[selectedSongIndex])
+                    let cell = tableView.cellForRow(at: indexPath)
+                    print("my cell label", indexPath, cell?.textLabel?.text!)
+                    for dummyDict:Dictionary in self.fetchedDict{
+                        let cellID = dummyDict["cellID"]! as! String
+                        if cellID == cell?.textLabel?.text!{
+                            controller.stemDict=dummyDict
+                        }
+                        
+                    }
+                    //controller.stemDict=self.fetchedDict[selectedSongIndex]
+                    //new controller.stemDict.insert(self.fetchedDict[selectedSongIndex], at: 0)
                 }
             }
         }
@@ -190,7 +203,9 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let event = self.fetchedResultsController.object(at: indexPath)
         self.configureCell(cell, withEvent: event)
+        print("original", indexPath, cell)
         return cell
+        
     }
     
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -218,6 +233,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     func configureCell(_ cell: UITableViewCell, withEvent event: Song) {
         if event.name?.description != nil{
             cell.textLabel!.text = "\(event.name!.description) - \(event.artist!.description)"
+            
         }
     }
     
@@ -234,7 +250,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // Edit the sort key as appropriate.
         let sortDescriptor = NSSortDescriptor(key: "name", ascending: false)
-        
         fetchRequest.sortDescriptors = [sortDescriptor]
         
         // Edit the section name key path and cache name if appropriate.

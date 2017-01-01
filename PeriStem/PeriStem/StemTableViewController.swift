@@ -10,19 +10,21 @@ import UIKit
 
 class StemTableViewController: UITableViewController {
 
-    
-    var stemDict = [Dictionary<String,String>()]
+    var stemDict = Dictionary<String,Any>()
+    var stems = Dictionary<String,String>()
     var stemList = [String]()
     
     func configureView() {
         // Update the user interface for the detail item.
         if let detail = self.detailItem {
             if stemDict.count > 0 {
-                for stem in stemDict[0] {
-                    print("SVC myprint \(stemDict[0])")
-                    if stem.key != "name" && stem.key != "artist"{
-                        stemList.append(stem.key)
-                    }
+                //for stem in stemDict[0] {
+                let selectedSongDict:Dictionary = stemDict
+                //new let selectedSongDict:Dictionary = stemDict[0]
+                print("STV transfered Dict", selectedSongDict)
+                self.stems = selectedSongDict["stemDict"] as! Dictionary<String, String>
+                for key in self.stems.keys {
+                    self.stemList.append(key)
                 }
             }
             //if let label = self.detailDescriptionLabel {
@@ -51,7 +53,7 @@ class StemTableViewController: UITableViewController {
     var detailItem: Song? {
         didSet {
             // Update the view.
-            stemDict.remove(at: 0) //remove dummy object
+            //new stemDict.remove(at: 0) //remove dummy object
             //print("myprint in detailItem")
             self.configureView()
         }
@@ -98,7 +100,7 @@ class StemTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        stemInPlayer = stemDict[0][stemList[indexPath.row]]
+        stemInPlayer = self.stems[stemList[indexPath.row]]
         print("will select \(stemInPlayer)")
         return indexPath
     }
