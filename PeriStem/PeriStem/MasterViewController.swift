@@ -17,26 +17,13 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     
     var StemTableViewController: StemTableViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
-    var fetchedDict = [Dictionary<String, Any>()]
-    //var fetchedDict = Dictionary<String, Dictionary<String, Any>>()
+    var fetchedDict = Dictionary<String, Dictionary<String, Any>>()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // delete everything in the core data
-        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
-        let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
-        let req : NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Song")
-        req.returnsObjectsAsFaults = false
-        do { let results = try context.fetch(req)
-            if results.count > 0 {
-                for result in results {
-                    context.delete(result as! NSManagedObject)
-                    do { try context.save()} catch {}
-                }
-            }
-        } catch {}
-        
+        // Delete core Data
+        clearCoreData()
         
         // add songs to the list, in future this is read form the user music library
         stemListforSongs.remove(at: 0) //remove the dummy object
@@ -53,7 +40,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         insertNewSong(songDict: stemListforSongs[1] as NSDictionary)
         
         self.fetchedDict = fetchSongsFromCoreData()
-        print("fetched Dic: ", self.fetchedDict.count)
+        //print("fetched Dic: ", self.fetchedDict.count)
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
@@ -69,6 +56,22 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func clearCoreData(){
+        // delete everything in the core data
+        let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
+        let context:NSManagedObjectContext = appDelegate.persistentContainer.viewContext
+        let req : NSFetchRequest<NSFetchRequestResult> = NSFetchRequest(entityName: "Song")
+        req.returnsObjectsAsFaults = false
+        do { let results = try context.fetch(req)
+            if results.count > 0 {
+                for result in results {
+                    context.delete(result as! NSManagedObject)
+                    do { try context.save()} catch {}
+                }
+            }
+        } catch {}
     }
     
     func insertNewSong(songDict: NSDictionary) {
@@ -111,10 +114,10 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         }
     }
     
-    func fetchSongsFromCoreData(artist: String? = nil) -> [Dictionary<String, Any>] {
+    func fetchSongsFromCoreData(artist: String? = nil) -> Dictionary<String, Dictionary<String, Any>> {
         
-        var resultsDictionary = [Dictionary<String, Any>()] // return dictionary variable
-        resultsDictionary.remove(at: 0)
+        // return dictionary variable: Key = songName - ArtistName, Value=Any
+        var resultsDictionary = Dictionary<String, Dictionary<String, Any>>()
         
         // Create Fetch Request
         let fetchRequest: NSFetchRequest<Song> = Song.fetchRequest()
@@ -146,7 +149,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     }
                     let cellID = "\(fetchedSong) - \(fetchedArtist)"
                     //setup the results dictionary
-                    resultsDictionary.append(["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict, "cellID": cellID])
+                    resultsDictionary[cellID] = ["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict]
                 }
             }
         } catch {
@@ -168,21 +171,14 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                 controller.navigationItem.leftItemsSupplementBackButton = true
                 //controller.stemDict.insert(self.fetchedDict[String(indexPath[1])]!, at: 0)
                 // set the stem list to the controller object
-                let selectedSongIndex:Int = indexPath[1]
+                //let selectedSongIndex:Int = indexPath[1]
                 if controller.stemDict.count == 0{
-                    //print("MVC myprint \(stemListforSongs[selectedSongIndex])")
                     //print("MVC selected dict", self.fetchedDict[selectedSongIndex])
-                    let cell = tableView.cellForRow(at: indexPath)
-                    print("my cell label", indexPath, cell?.textLabel?.text!)
-                    for dummyDict:Dictionary in self.fetchedDict{
-                        let cellID = dummyDict["cellID"]! as! String
-                        if cellID == cell?.textLabel?.text!{
-                            controller.stemDict=dummyDict
-                        }
-                        
-                    }
-                    //controller.stemDict=self.fetchedDict[selectedSongIndex]
-                    //new controller.stemDict.insert(self.fetchedDict[selectedSongIndex], at: 0)
+                    
+                    let cell = tableView.cellForRow(at: indexPath)// selected Cell
+                    let cellID = cell?.textLabel?.text! //songID = SongName - ArtistName
+                    controller.stemDict = self.fetchedDict[cellID!]!
+
                 }
             }
         }
@@ -203,7 +199,6 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let event = self.fetchedResultsController.object(at: indexPath)
         self.configureCell(cell, withEvent: event)
-        print("original", indexPath, cell)
         return cell
         
     }
