@@ -27,8 +27,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // add songs to the list, in future this is read form the user music library
         stemListforSongs.remove(at: 0) //remove the dummy object
-        stemListforSongs.append(["name":"Odessey","Bass and Drums":"05 Space Oddity (Bass and Drums).m4p", "Strings":"06 Space Oddity (Strings).m4p", "artist":"David"])
-        stemListforSongs.append(["name":"Odessey2","Acoustic Guitar":"07 Space Oddity (Acoustic Guitar).m4p", "Lead Vocal":"11 Space Oddity (Lead Vocal).m4p", "artist":"Bowie"])
+        stemListforSongs.append(["name":"Oddity","Bass and Drums":"05 Space Oddity (Bass and Drums).m4p", "Strings":"06 Space Oddity (Strings).m4p", "artist":"David"])
+        stemListforSongs.append(["name":"Space","Acoustic Guitar":"07 Space Oddity (Acoustic Guitar).m4p", "Lead Vocal":"11 Space Oddity (Lead Vocal).m4p", "artist":"Bowie"])
         
         
         // Do any additional setup after loading the view, typically from a nib.
