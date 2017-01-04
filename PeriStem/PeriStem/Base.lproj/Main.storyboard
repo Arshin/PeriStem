@@ -73,14 +73,40 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="stemCell" id="QSF-RY-jT8">
-                                <rect key="frame" x="0.0" y="55.5" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="stemCell" id="QSF-RY-jT8" customClass="costumTableViewCell" customModule="PeriStem" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="56" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QSF-RY-jT8" id="kE2-8M-FtJ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
+                                    <subviews>
+                                        <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mS7-Tk-ruI">
+                                            <rect key="frame" x="285" y="7" width="57" height="30"/>
+                                            <color key="backgroundColor" red="0.55326915580000002" green="0.84819121980000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="57" id="ZSO-05-E3n"/>
+                                            </constraints>
+                                            <state key="normal" title="Pair"/>
+                                        </button>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lp7-wD-d6f">
+                                            <rect key="frame" x="14" y="7" width="272" height="30"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <nil key="textColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="mS7-Tk-ruI" secondAttribute="trailing" id="B8j-hg-2xq"/>
+                                        <constraint firstItem="mS7-Tk-ruI" firstAttribute="bottom" secondItem="Lp7-wD-d6f" secondAttribute="bottom" id="GIh-nZ-Kow"/>
+                                        <constraint firstItem="mS7-Tk-ruI" firstAttribute="top" secondItem="Lp7-wD-d6f" secondAttribute="top" id="H5f-an-LRW"/>
+                                        <constraint firstItem="Lp7-wD-d6f" firstAttribute="leading" secondItem="kE2-8M-FtJ" secondAttribute="leadingMargin" constant="6" id="MNs-1O-hHH"/>
+                                        <constraint firstItem="mS7-Tk-ruI" firstAttribute="centerY" secondItem="kE2-8M-FtJ" secondAttribute="centerY" id="ecf-ro-xE1"/>
+                                        <constraint firstItem="mS7-Tk-ruI" firstAttribute="leading" secondItem="Lp7-wD-d6f" secondAttribute="trailing" constant="-1" id="nCQ-t5-Yud"/>
+                                    </constraints>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="pairButton" destination="mS7-Tk-ruI" id="bm9-MS-EBN"/>
+                                    <outlet property="stemSongTitleLabel" destination="Lp7-wD-d6f" id="O7L-FZ-7iz"/>
                                     <segue destination="A2B-39-5Y1" kind="show" id="LnY-4p-DHM"/>
                                 </connections>
                             </tableViewCell>
@@ -88,14 +114,14 @@
                         <sections/>
                         <connections>
                             <outlet property="dataSource" destination="jJA-gV-cjK" id="DkY-40-7Qp"/>
-                            <outlet property="delegate" destination="jJA-gV-cjK" id="YQO-2q-3Z0"/>
+                            <outlet property="delegate" destination="jJA-gV-cjK" id="II7-21-WGH"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" id="OZd-Pt-KpP"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rVU-n1-FRa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="708" y="128"/>
+            <point key="canvasLocation" x="708" y="127.28635682158921"/>
         </scene>
         <!--Stem Player-->
         <scene sceneID="UOe-ur-vUF">

@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		DD0E522B1E1CC2AD00220E8D /* spaceoddity.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */; };
 		DD0E522D1E1CC2BA00220E8D /* pianoImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */; };
+		DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */; };
 		DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD387D351DC3D47900861326 /* StemTableViewController.swift */; };
 		DD39248B1E1A114A008D3E69 /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD39248A1E1A114A008D3E69 /* piano.mp3 */; };
 		DD3924911E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */; };
@@ -25,6 +26,7 @@
 /* Begin PBXFileReference section */
 		DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spaceoddity.jpeg; sourceTree = "<group>"; };
 		DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pianoImage.jpg; sourceTree = "<group>"; };
+		DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = costumTableViewCell.swift; sourceTree = "<group>"; };
 		DD387D351DC3D47900861326 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
 		DD39248A1E1A114A008D3E69 /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
 		DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TouchType_90_Rim_Dry01.wav; sourceTree = "<group>"; };
@@ -74,6 +76,7 @@
 				DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */,
 				DDECBC4D1DC36EBE00414FC8 /* DetailViewController.swift */,
 				DDECBC4F1DC36EBE00414FC8 /* Main.storyboard */,
+				DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */,
 				DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */,
 				DD387D351DC3D47900861326 /* StemTableViewController.swift */,
 				DDECBC521DC36EBE00414FC8 /* Assets.xcassets */,
@@ -170,6 +173,7 @@
 				DDBCCD2E1DEBDF5600E540EE /* PlayerClass.swift in Sources */,
 				DDECBC4E1DC36EBE00414FC8 /* DetailViewController.swift in Sources */,
 				DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */,
+				DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

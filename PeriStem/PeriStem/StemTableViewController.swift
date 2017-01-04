@@ -91,8 +91,21 @@ class StemTableViewController: UITableViewController {
  */
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*
         let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath)
         cell.textLabel?.text = String(describing: stemList[indexPath[1]])
+        return cell
+        */
+        
+        // define a tableViewCell from our costumTableViewCell Subclass
+        let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath) as! costumTableViewCell
+        // set stem song title
+        cell.stemSongTitleLabel?.text = stemList[indexPath[1]]
+        // tag pairButton so that we now which one is selected
+        cell.pairButton.tag = indexPath.row
+        // add a target to the button
+        cell.pairButton.addTarget(self, action: #selector(pairButtonAction), for: .touchUpInside)
+        
         return cell
         
     }
@@ -102,6 +115,10 @@ class StemTableViewController: UITableViewController {
         stemInPlayer = self.stems[stemList[indexPath.row]]!
         print("will select \(stemInPlayer)")
         return indexPath
+    }
+    
+    func pairButtonAction(sender: UIButton){
+        print("Pair Button is pushed for stem: \(stemList[sender.tag])")
     }
     /*
     // Override to support conditional editing of the table view.
