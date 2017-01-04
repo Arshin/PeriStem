@@ -20,8 +20,7 @@ class StemTableViewController: UITableViewController {
             if stemDict.count > 0 {
                 //for stem in stemDict[0] {
                 let selectedSongDict:Dictionary = stemDict
-                //new let selectedSongDict:Dictionary = stemDict[0]
-                print("STV transfered Dict", selectedSongDict)
+                //print("STV transfered Dict", selectedSongDict)
                 self.stems = selectedSongDict["stemDict"] as! Dictionary<String, String>
                 for key in self.stems.keys {
                     self.stemList.append(key)
@@ -53,7 +52,6 @@ class StemTableViewController: UITableViewController {
     var detailItem: Song? {
         didSet {
             // Update the view.
-            //new stemDict.remove(at: 0) //remove dummy object
             //print("myprint in detailItem")
             self.configureView()
         }

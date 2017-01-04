@@ -12,29 +12,45 @@ import AVFoundation
 class PlayerClass: UIViewController {
     
     var player:AVAudioPlayer = AVAudioPlayer()
+    var audioURL:URL? = nil
+    var playing:Bool = false
     
     @IBOutlet var songLabel: UILabel!
     
     @IBOutlet var scrubSlider: UISlider!
     
+    @IBAction func scrub(_ sender: Any) {
+        player.currentTime = TimeInterval(scrubSlider.value)
+    }
+    
     @IBOutlet var volumeSlider: UISlider!
     
+    @IBAction func changeVolume(_ sender: Any) {
+        player.volume = volumeSlider.value
+    }
+    @IBOutlet var playButton: UIButton!
+    
     @IBAction func playButton(_ sender: Any) {
+        if self.playing != true{
+            //play and update play button image
+            player.play()
+            playButton.setImage(#imageLiteral(resourceName: "iconPause"), for: UIControlState.normal)
+            self.playing = true
+        }else{
+            //pausing and updating variables/images
+            player.pause()
+            self.playing = false
+            playButton.setImage(#imageLiteral(resourceName: "iconPlay"), for: UIControlState.normal)
+        }
     }
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
         if stemInPlayer != nil{
-            
-            songLabel.text = stemInPlayer!
-            let fileToPlay:NSString = stemInPlayer! as NSString
-            let fileName = fileToPlay.deletingPathExtension
-            let fileExtension = fileToPlay.pathExtension
-            print("filename: \(fileName), extention: \(fileExtension)")
-            //let audioPath = Bundle.main.path(forResource: fileName, ofType: fileExtension)
+            prepareNewSong()
         }
         
     }
@@ -42,6 +58,34 @@ class PlayerClass: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func updateScrubSlider(){
+        scrubSlider.value = Float(player.currentTime)
+    }
+    
+    func prepareNewSong(){
+        // update somg label
+        songLabel.text = stemInPlayer!
+        // extract file info
+        let fileToPlay:NSString = stemInPlayer! as NSString
+        let fileName = fileToPlay.deletingPathExtension
+        let fileExtension = fileToPlay.pathExtension
+        print("filename: \(fileName), extention: \(fileExtension)")
+        //set audio url
+        self.audioURL = Bundle.main.url(forResource: fileName, withExtension: fileExtension)
+        //let audioPath = Bundle.main.url(forResource: "piano", withExtension: "mp3")
+        //print("audio path is: \(audioPath)")
+        // load audion url into player
+        do {
+            try player = AVAudioPlayer(contentsOf: self.audioURL!)
+        }catch{}
+        
+        // update scrub slider as song plays
+        var timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateScrubSlider), userInfo: nil, repeats: true)
+        
+        // update scruber maximum value
+        scrubSlider.maximumValue = Float(player.duration)
     }
     
     /*
