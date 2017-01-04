@@ -15,6 +15,10 @@ class PlayerClass: UIViewController {
     var audioURL:URL? = nil
     var playing:Bool = false
     
+    @IBOutlet var songImageView: UIImageView!
+    
+    @IBOutlet var songBackgroundImageView: UIImageView!
+    
     @IBOutlet var songLabel: UILabel!
     
     @IBOutlet var scrubSlider: UISlider!
@@ -65,8 +69,11 @@ class PlayerClass: UIViewController {
     }
     
     func prepareNewSong(){
+        
         // update somg label
         songLabel.text = stemInPlayer!
+        
+        
         // extract file info
         let fileToPlay:NSString = stemInPlayer! as NSString
         let fileName = fileToPlay.deletingPathExtension
@@ -75,8 +82,9 @@ class PlayerClass: UIViewController {
         //set audio url
         self.audioURL = Bundle.main.url(forResource: fileName, withExtension: fileExtension)
         //let audioPath = Bundle.main.url(forResource: "piano", withExtension: "mp3")
-        //print("audio path is: \(audioPath)")
+        //print("audio path is: \(audioURL)")
         // load audion url into player
+        
         do {
             try player = AVAudioPlayer(contentsOf: self.audioURL!)
         }catch{}
@@ -86,7 +94,14 @@ class PlayerClass: UIViewController {
         
         // update scruber maximum value
         scrubSlider.maximumValue = Float(player.duration)
-    }
+        
+        // set image for the album
+        //let controller = (segue.destination as! UINavigationController).topViewController as! StemTableViewController
+        print("image should be \(stemDictSelected["image"]!)")
+        songImageView.image = UIImage(named: stemDictSelected["image"]! as! String)
+        songBackgroundImageView.image = UIImage(named: stemDictSelected["image"]! as! String)
+        }
+    
     
     /*
     // MARK: - Navigation

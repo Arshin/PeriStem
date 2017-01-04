@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0E522B1E1CC2AD00220E8D /* spaceoddity.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */; };
+		DD0E522D1E1CC2BA00220E8D /* pianoImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */; };
 		DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD387D351DC3D47900861326 /* StemTableViewController.swift */; };
 		DD39248B1E1A114A008D3E69 /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD39248A1E1A114A008D3E69 /* piano.mp3 */; };
 		DD3924911E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */; };
@@ -21,6 +23,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spaceoddity.jpeg; sourceTree = "<group>"; };
+		DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pianoImage.jpg; sourceTree = "<group>"; };
 		DD387D351DC3D47900861326 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
 		DD39248A1E1A114A008D3E69 /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
 		DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TouchType_90_Rim_Dry01.wav; sourceTree = "<group>"; };
@@ -78,6 +82,8 @@
 				DDECBC481DC36EBE00414FC8 /* PeriStem.xcdatamodeld */,
 				DD39248A1E1A114A008D3E69 /* piano.mp3 */,
 				DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */,
+				DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */,
+				DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */,
 			);
 			path = PeriStem;
 			sourceTree = "<group>";
@@ -145,7 +151,9 @@
 				DDECBC561DC36EBE00414FC8 /* LaunchScreen.storyboard in Resources */,
 				DDECBC531DC36EBE00414FC8 /* Assets.xcassets in Resources */,
 				DD39248B1E1A114A008D3E69 /* piano.mp3 in Resources */,
+				DD0E522D1E1CC2BA00220E8D /* pianoImage.jpg in Resources */,
 				DDECBC511DC36EBE00414FC8 /* Main.storyboard in Resources */,
+				DD0E522B1E1CC2AD00220E8D /* spaceoddity.jpeg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

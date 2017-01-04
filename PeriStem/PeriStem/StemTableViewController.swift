@@ -20,6 +20,7 @@ class StemTableViewController: UITableViewController {
             if stemDict.count > 0 {
                 //for stem in stemDict[0] {
                 let selectedSongDict:Dictionary = stemDict
+                stemDictSelected = stemDict // everytime StemTableViewController is populated this dictionary gets updated, at least I hope so!
                 //print("STV transfered Dict", selectedSongDict)
                 self.stems = selectedSongDict["stemDict"] as! Dictionary<String, String>
                 for key in self.stems.keys {

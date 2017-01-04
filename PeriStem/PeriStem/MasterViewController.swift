@@ -9,8 +9,8 @@
 import UIKit
 import CoreData
 
-var stemInPlayer:String? = nil
-
+var stemInPlayer:String? = nil // this is the name of the stem selected, to be removed in near future
+var stemDictSelected = Dictionary<String,Any>() // this is the dictionary of the selected song
 var stemListforSongs = [Dictionary<String, String>()]
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
@@ -27,8 +27,8 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         // add songs to the list, in future this is read form the user music library
         stemListforSongs.remove(at: 0) //remove the dummy object
-        stemListforSongs.append(["name":"Oddity","Guitar":"TouchType_90_Rim_Dry01.wav", "Strings":"piano.mp3", "Piano": "piano.mp3", "artist":"David"])
-        stemListforSongs.append(["name":"Space","Acoustic Guitar":"07 Space Oddity (Acoustic Guitar).m4p", "Lead Vocal":"11 Space Oddity (Lead Vocal).m4p", "artist":"Bowie"])
+        stemListforSongs.append(["name":"Oddity","Guitar":"TouchType_90_Rim_Dry01.wav", "Strings":"piano.mp3", "Piano": "piano.mp3", "artist":"David", "image":"spaceoddity.jpeg"])
+        stemListforSongs.append(["name":"Space","Acoustic Guitar":"TouchType_90_Rim_Dry01.wav", "Lead Vocal":"11 Space Oddity (Lead Vocal).m4p", "artist":"Bowie", "image":"pianoImage.jpg"])
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -82,11 +82,12 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         // If appropriate, configure the new managed object.
         newSong.name = (songDict["name"] as! String)
         newSong.artist = (songDict["artist"] as! String)
+        newSong.image = (songDict["image"] as! String)
         
         var firstStemAdded = false
         // assign stems in the CoreData
         for file in songDict{
-            if file.key as! String != "name" && file.key as! String != "artist"{
+            if file.key as! String != "name" && file.key as! String != "artist" && file.key as! String != "image"{
                 let entityStems = NSEntityDescription.entity(forEntityName: "Stems", in: self.managedObjectContext!)
                 let newStem = NSManagedObject(entity: entityStems!, insertInto: self.managedObjectContext!)
                 newStem.setValue(file.key, forKey: "name")
@@ -140,7 +141,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
             for songObject in result {
                 //let songID = songObject.objectID.description //create unique key for the results dictionary
                 
-                if let fetchedSong = songObject.value(forKey: "name"), let fetchedArtist = songObject.value(forKey: "artist"){
+                if let fetchedSong = songObject.value(forKey: "name"), let fetchedArtist = songObject.value(forKey: "artist"), let fetchedImage = songObject.value(forKey: "image"){
                     
                     var stemDict = Dictionary<String, String>()
                     let allStems = songObject.songs!.allObjects
@@ -149,7 +150,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
                     }
                     let cellID = "\(fetchedSong) - \(fetchedArtist)"
                     //setup the results dictionary
-                    resultsDictionary[cellID] = ["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict]
+                    resultsDictionary[cellID] = ["name":fetchedSong, "artist":fetchedArtist, "object":songObject, "stemDict":stemDict, "image":fetchedImage]
                 }
             }
         } catch {
