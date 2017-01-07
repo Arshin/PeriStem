@@ -10,6 +10,7 @@
 		DD0E522B1E1CC2AD00220E8D /* spaceoddity.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */; };
 		DD0E522D1E1CC2BA00220E8D /* pianoImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */; };
 		DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */; };
+		DD0E52351E21874E00220E8D /* popUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E52341E21874E00220E8D /* popUpViewController.swift */; };
 		DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD387D351DC3D47900861326 /* StemTableViewController.swift */; };
 		DD39248B1E1A114A008D3E69 /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD39248A1E1A114A008D3E69 /* piano.mp3 */; };
 		DD3924911E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */; };
@@ -17,7 +18,6 @@
 		DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */; };
 		DDECBC4A1DC36EBE00414FC8 /* PeriStem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC481DC36EBE00414FC8 /* PeriStem.xcdatamodeld */; };
 		DDECBC4C1DC36EBE00414FC8 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */; };
-		DDECBC4E1DC36EBE00414FC8 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC4D1DC36EBE00414FC8 /* DetailViewController.swift */; };
 		DDECBC511DC36EBE00414FC8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDECBC4F1DC36EBE00414FC8 /* Main.storyboard */; };
 		DDECBC531DC36EBE00414FC8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDECBC521DC36EBE00414FC8 /* Assets.xcassets */; };
 		DDECBC561DC36EBE00414FC8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDECBC541DC36EBE00414FC8 /* LaunchScreen.storyboard */; };
@@ -27,6 +27,7 @@
 		DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spaceoddity.jpeg; sourceTree = "<group>"; };
 		DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pianoImage.jpg; sourceTree = "<group>"; };
 		DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = costumTableViewCell.swift; sourceTree = "<group>"; };
+		DD0E52341E21874E00220E8D /* popUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = popUpViewController.swift; sourceTree = "<group>"; };
 		DD387D351DC3D47900861326 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
 		DD39248A1E1A114A008D3E69 /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
 		DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TouchType_90_Rim_Dry01.wav; sourceTree = "<group>"; };
@@ -35,7 +36,6 @@
 		DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDECBC491DC36EBE00414FC8 /* PeriStem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PeriStem.xcdatamodel; sourceTree = "<group>"; };
 		DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
-		DDECBC4D1DC36EBE00414FC8 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		DDECBC501DC36EBE00414FC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DDECBC521DC36EBE00414FC8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DDECBC551DC36EBE00414FC8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -74,8 +74,8 @@
 			children = (
 				DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */,
 				DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */,
-				DDECBC4D1DC36EBE00414FC8 /* DetailViewController.swift */,
 				DDECBC4F1DC36EBE00414FC8 /* Main.storyboard */,
+				DD0E52341E21874E00220E8D /* popUpViewController.swift */,
 				DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */,
 				DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */,
 				DD387D351DC3D47900861326 /* StemTableViewController.swift */,
@@ -171,9 +171,9 @@
 				DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */,
 				DDECBC4C1DC36EBE00414FC8 /* MasterViewController.swift in Sources */,
 				DDBCCD2E1DEBDF5600E540EE /* PlayerClass.swift in Sources */,
-				DDECBC4E1DC36EBE00414FC8 /* DetailViewController.swift in Sources */,
 				DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */,
 				DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */,
+				DD0E52351E21874E00220E8D /* popUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
