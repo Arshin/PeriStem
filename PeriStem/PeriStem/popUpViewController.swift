@@ -8,8 +8,14 @@
 
 import UIKit
 
-class popUpViewController: UIViewController{
+class popUpViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
+    @IBOutlet var popUpStemTable: UITableView!
+    // Input and output Stem List
+    var inputStemList:Array = [String]()
+    var checkedStemList:Array = [Bool]()
+    var outputStemList:Array = [String]()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -28,7 +34,15 @@ class popUpViewController: UIViewController{
     }
     
     @IBAction func closePopUp(_ sender: Any) {
-        //self.view.removeFromSuperview()
+        //check if each stem is checked and return the stems in output stem list
+        for (ind, val) in self.checkedStemList.enumerated() {
+            if val{
+                self.outputStemList.append(self.inputStemList[ind])
+            }
+        }
+        print("checked stems are: \(self.outputStemList)")
+        
+        // execute removing view animation
         self.removeAnimate()
     }
 
@@ -55,6 +69,49 @@ class popUpViewController: UIViewController{
             
         })
     }
+    
+    // function to initiate checked array based on the stem input list count
+    func initiatCheckedArray(stemNumber:Int) {
+        let checkedArray = [Bool](repeating:false, count:stemNumber)
+        self.checkedStemList = checkedArray
+        //print("checked array initiated as: \(checkedArray)")
+    }
+    
+    // MARK: TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if self.inputStemList.count > 0{
+            initiatCheckedArray(stemNumber: self.inputStemList.count)
+            return inputStemList.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = self.popUpStemTable.dequeueReusableCell(withIdentifier: "popUpCell", for: indexPath) 
+        cell.textLabel?.text = inputStemList[indexPath.row]
+        cell.accessoryType = .none //set cell defualt state as unchecked
+        return cell
+    }
+    
+    // Implement CheckBox
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = self.popUpStemTable.cellForRow(at: indexPath){
+            //handle checked and unchecked cells
+            if cell.accessoryType == .none {
+                cell.accessoryType = .checkmark
+                self.checkedStemList[indexPath.row] = true
+                //print("selected \(self.inputStemList[indexPath.row])")
+            } else {
+                cell.accessoryType = .none
+                //print("deselected \(self.inputStemList[indexPath.row])")
+                self.checkedStemList[indexPath.row] = false
+            }
+        }
+    }
+ 
+ 
     /*
     // MARK: - Navigation
 

@@ -119,22 +119,14 @@ class StemTableViewController: UITableViewController {
     
     func pairButtonAction(sender: UIButton){
         print("Pair Button is pushed for stem: \(stemList[sender.tag])")
-        
-        //let firstActivityItem = "\(stemList[sender.tag])"
-        
-        // creat a pop-up menu of the stems OR speakers depending on chosen design, i.e. Stem Vs Speaker importance
-        /*
-        let activiyViewController: UIActivityViewController = UIActivityViewController(activityItems: [firstActivityItem], applicationActivities: nil)
-        
-        self.present(activiyViewController, animated: true, completion: nil)
-        
-        */
+        // creat popUp viewcontroller
         let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! popUpViewController
         self.addChildViewController(popUpVC)
         popUpVC.view.frame = self.view.frame
         self.view.addSubview(popUpVC.view)
         popUpVC.didMove(toParentViewController: self)
-        
+        // send stemList to the popUpVC
+        popUpVC.inputStemList = stemList
         
     }
     /*

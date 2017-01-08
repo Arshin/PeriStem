@@ -125,6 +125,10 @@
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="hEx-vD-I9F" id="cpa-Dh-74a"/>
+                                            <outlet property="delegate" destination="hEx-vD-I9F" id="M5c-Dt-Cdg"/>
+                                        </connections>
                                     </tableView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.55326915580000002" green="0.84819121980000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -132,6 +136,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <connections>
+                        <outlet property="popUpStemTable" destination="GjE-47-dfv" id="kOM-2w-TEy"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1g2-SY-Neh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
