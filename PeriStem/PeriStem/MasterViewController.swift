@@ -11,7 +11,7 @@ import CoreData
 
 var stemInPlayer:String? = nil // this is the name of the stem selected, to be removed in near future
 var stemDictSelected = Dictionary<String,Any>() // this is the dictionary of the selected song
-var stemListforSongs = [Dictionary<String, String>()]
+var stemListforSongs = [Dictionary<String, String>()] // this list is coming form database, eventually
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     

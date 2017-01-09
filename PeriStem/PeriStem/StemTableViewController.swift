@@ -13,6 +13,9 @@ class StemTableViewController: UITableViewController {
     var stemDict = Dictionary<String,Any>()
     var stems = Dictionary<String,String>()
     var stemList = [String]()
+    // speaker IDs are hard coded, to be replaced with searchForSpeaker method
+    var speakerList = ["Speaker 1", "Speaker 2", "Speaker 3"]
+    var speakerDict = Dictionary<String, Any>()
     
     func configureView() {
         // Update the user interface for the detail item.
@@ -26,18 +29,37 @@ class StemTableViewController: UITableViewController {
                 for key in self.stems.keys {
                     self.stemList.append(key)
                 }
+            //print("stemList: \(stemList), speakerList: \(speakerList)")
+            initializeSpeakerDict(stemList: stemList, speakerList: speakerList)
+                
             }
             //if let label = self.detailDescriptionLabel {
             //    label.text = detail.timestamp!.description
             //}
+            
+            // initializing speaker dictionary
+            
+            
         }
-        
     }
+    
+    func initializeSpeakerDict(stemList:[String], speakerList:[String]){
+        
+        for speaker in speakerList {
+            
+            self.speakerDict[speaker] = [Bool](repeating:false, count:stemList.count)
+        }
+        //print("initialized Speaker Dictionary \(self.speakerDict)")
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //print("myprint in viewdidload")
+        // prepare stemList and speakerDict
         self.configureView()
+        
+        
+        
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
 
@@ -69,7 +91,7 @@ class StemTableViewController: UITableViewController {
         // #warning Incomplete implementation, return the number of rows
         
         if stemDict.count > 0 {
-            return stemList.count
+            return speakerList.count
         } else {
             return 0
         }
@@ -91,16 +113,11 @@ class StemTableViewController: UITableViewController {
  */
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath)
-        cell.textLabel?.text = String(describing: stemList[indexPath[1]])
-        return cell
-        */
         
         // define a tableViewCell from our costumTableViewCell Subclass
         let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath) as! costumTableViewCell
         // set stem song title
-        cell.stemSongTitleLabel?.text = stemList[indexPath[1]]
+        cell.stemSongTitleLabel?.text = speakerList[indexPath[1]]
         // tag pairButton so that we now which one is selected
         cell.pairButton.tag = indexPath.row
         // add a target to the button
@@ -118,17 +135,26 @@ class StemTableViewController: UITableViewController {
     }
     
     func pairButtonAction(sender: UIButton){
-        print("Pair Button is pushed for stem: \(stemList[sender.tag])")
+        print("Pair Button is pushed for Speaker: \(speakerList[sender.tag])")
         // creat popUp viewcontroller
+        
         let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! popUpViewController
+        
         self.addChildViewController(popUpVC)
         popUpVC.view.frame = self.view.frame
         self.view.addSubview(popUpVC.view)
         popUpVC.didMove(toParentViewController: self)
+    
+        // set the parent class
+        popUpVC.parentVC = self
+        popUpVC.selectedSpeaker = speakerList[sender.tag]
+        //popUpVC.myPopUpViewControllerDelegate = self
         // send stemList to the popUpVC
         popUpVC.inputStemList = stemList
+        print("popUpVC checked list \(popUpVC.checkedStemList)")
         
     }
+
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -15,9 +15,16 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
     var inputStemList:Array = [String]()
     var checkedStemList:Array = [Bool]()
     var outputStemList:Array = [String]()
+    var selectedSpeaker:String?
+    // set parent view controller
+    var parentVC: StemTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //let parent  = self.parent?.view as! UITableViewController
+        //let parentViewControllerSpeakerDict = (self.parent as! StemTableViewController).speakerDict
+        //print(parentViewControllerSpeakerDict)
+        
         
         // tint the background color
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
@@ -41,7 +48,7 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         print("checked stems are: \(self.outputStemList)")
-        
+        parentVC?.speakerDict[selectedSpeaker!] = checkedStemList
         // execute removing view animation
         self.removeAnimate()
     }

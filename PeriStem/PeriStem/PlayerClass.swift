@@ -96,8 +96,7 @@ class PlayerClass: UIViewController {
         scrubSlider.maximumValue = Float(player.duration)
         
         // set image for the album
-        //let controller = (segue.destination as! UINavigationController).topViewController as! StemTableViewController
-        print("image should be \(stemDictSelected["image"]!)")
+        //print("image should be \(stemDictSelected["image"]!)")
         songImageView.image = UIImage(named: stemDictSelected["image"]! as! String)
         songBackgroundImageView.image = UIImage(named: stemDictSelected["image"]! as! String)
         }
