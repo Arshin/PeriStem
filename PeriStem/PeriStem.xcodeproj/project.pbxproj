@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DD0D946A1E234D62004C4B0D /* speakerPairingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0D94691E234D62004C4B0D /* speakerPairingViewController.swift */; };
 		DD0E522B1E1CC2AD00220E8D /* spaceoddity.jpeg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */; };
 		DD0E522D1E1CC2BA00220E8D /* pianoImage.jpg in Resources */ = {isa = PBXBuildFile; fileRef = DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */; };
 		DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */; };
@@ -24,6 +25,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DD0D94691E234D62004C4B0D /* speakerPairingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = speakerPairingViewController.swift; sourceTree = "<group>"; };
 		DD0E522A1E1CC2AD00220E8D /* spaceoddity.jpeg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = spaceoddity.jpeg; sourceTree = "<group>"; };
 		DD0E522C1E1CC2BA00220E8D /* pianoImage.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = pianoImage.jpg; sourceTree = "<group>"; };
 		DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = costumTableViewCell.swift; sourceTree = "<group>"; };
@@ -79,6 +81,7 @@
 				DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */,
 				DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */,
 				DD387D351DC3D47900861326 /* StemTableViewController.swift */,
+				DD0D94691E234D62004C4B0D /* speakerPairingViewController.swift */,
 				DDECBC521DC36EBE00414FC8 /* Assets.xcassets */,
 				DDECBC541DC36EBE00414FC8 /* LaunchScreen.storyboard */,
 				DDECBC571DC36EBE00414FC8 /* Info.plist */,
@@ -173,6 +176,7 @@
 				DDBCCD2E1DEBDF5600E540EE /* PlayerClass.swift in Sources */,
 				DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */,
 				DD0E52321E1DA17C00220E8D /* costumTableViewCell.swift in Sources */,
+				DD0D946A1E234D62004C4B0D /* speakerPairingViewController.swift in Sources */,
 				DD0E52351E21874E00220E8D /* popUpViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

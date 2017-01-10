@@ -15,7 +15,7 @@ var stemListforSongs = [Dictionary<String, String>()] // this list is coming for
 
 class MasterViewController: UITableViewController, NSFetchedResultsControllerDelegate {
     
-    var StemTableViewController: StemTableViewController? = nil
+    var speakerPairingViewController: speakerPairingViewController? = nil
     var managedObjectContext: NSManagedObjectContext? = nil
     var fetchedDict = Dictionary<String, Dictionary<String, Any>>()
     
@@ -44,7 +44,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         
         if let split = self.splitViewController {
             let controllers = split.viewControllers
-            self.StemTableViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? StemTableViewController
+            self.speakerPairingViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? speakerPairingViewController
         }
     }
     
@@ -166,7 +166,7 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         if segue.identifier == "showDetail" {
             if let indexPath = self.tableView.indexPathForSelectedRow {
                 let object = self.fetchedResultsController.object(at: indexPath)
-                let controller = (segue.destination as! UINavigationController).topViewController as! StemTableViewController
+                let controller = (segue.destination as! UINavigationController).topViewController as! speakerPairingViewController
                 controller.detailItem = object
                 controller.navigationItem.leftBarButtonItem = self.splitViewController?.displayModeButtonItem
                 controller.navigationItem.leftItemsSupplementBackButton = true

@@ -8,8 +8,8 @@
 
 import UIKit
 
-class StemTableViewController: UITableViewController {
-
+class speakerPairingViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
     var stemDict = Dictionary<String,Any>()
     var stems = Dictionary<String,String>()
     var stemList = [String]()
@@ -81,40 +81,16 @@ class StemTableViewController: UITableViewController {
     }
     
     // MARK: - Table view data source
-
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
-    }
-
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of rows
-        
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if stemDict.count > 0 {
             return speakerList.count
         } else {
             return 0
         }
- 
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        self.tableView.reloadData()
-    }
-
-/*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath)
-
-        // Configure the cell...
-        cell.textLabel?.text = String(describing: indexPath)
-        return cell
-    }
- */
-    
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         // define a tableViewCell from our costumTableViewCell Subclass
         let cell = tableView.dequeueReusableCell(withIdentifier: "stemCell", for: indexPath) as! costumTableViewCell
         // set stem song title
@@ -125,20 +101,25 @@ class StemTableViewController: UITableViewController {
         cell.pairButton.addTarget(self, action: #selector(pairButtonAction), for: .touchUpInside)
         
         return cell
-        
     }
-
     
-    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+    /*
+    // first I was using table view to get to the player no longer applicable
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         stemInPlayer = self.stems[stemList[indexPath.row]]!
         print("will select \(stemInPlayer)")
         return indexPath
     }
+    */
+    
+    // MARK: - pair button
     
     func pairButtonAction(sender: UIButton){
-        print("Pair Button is pushed for Speaker: \(speakerList[sender.tag])")
-        // creat popUp viewcontroller
         
+        let speakerID:String = speakerList[sender.tag]
+        print("Pair for Speaker: \(speakerID) is pushed")
+        
+        // create popUp viewcontroller
         let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "sbPopUpID") as! popUpViewController
         
         self.addChildViewController(popUpVC)
@@ -146,16 +127,25 @@ class StemTableViewController: UITableViewController {
         self.view.addSubview(popUpVC.view)
         popUpVC.didMove(toParentViewController: self)
     
-        // set the parent class
-        //popUpVC.parentVC = self
-        popUpVC.selectedSpeaker = speakerList[sender.tag]
-        //popUpVC.myPopUpViewControllerDelegate = self
-        // send stemList to the popUpVC
-        popUpVC.inputStemList = stemList
-        print("popUpVC checked list \(popUpVC.checkedStemList)")
-        
+        // Initialize popUpVC Class Variables
+        popUpVC.initializePopUpVCVariables(delegate: self, inputStems: self.stemList, speakerID: speakerID, currentSelection: self.speakerDict[speakerID] as! [Bool])
+
     }
 
+    @IBAction func goToPlayerHandler(_ sender: Any) {
+        //stemInPlayer = self.stems[stemList[indexPath.row]]!
+        stemInPlayer = self.stems[stemList[0]]! // should change to the collection of stems selected
+        print("will select \(stemInPlayer)")
+    }
+    
+    func popUpViewControllerDidSelect(speakerID: String, selection: [Bool])  {
+        //print("this is from the popup: ", speakerID)
+        self.speakerDict[speakerID] = selection // selection from the popup is saved
+    }
+    
+    @IBAction func resetAutoStemAssignmentButtonHandler(_ sender: Any) {
+        print("Current speaker configureation is \(self.speakerDict)")
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

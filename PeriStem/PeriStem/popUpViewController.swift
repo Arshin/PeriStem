@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol popUpViewControllerDelegate {
+    func popUpViewControllerDidSelect(value: String)
+}
+
 class popUpViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
 
     @IBOutlet var popUpStemTable: UITableView!
@@ -17,7 +21,7 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
     var outputStemList:Array = [String]()
     var selectedSpeaker:String?
     // set parent view controller
-    var parentVC: StemTableViewController?
+    var delegate: speakerPairingViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,11 +34,10 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.7)
         
         self.showAnimate()
-        
 
         // Do any additional setup after loading the view.
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -48,7 +51,9 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
             }
         }
         print("checked stems are: \(self.outputStemList)")
-        parentVC?.speakerDict[selectedSpeaker!] = checkedStemList
+        
+        //upon closing the popUpVC the selection is sent to the parent VC
+        self.delegate?.popUpViewControllerDidSelect(speakerID: self.selectedSpeaker!, selection: self.checkedStemList)
         // execute removing view animation
         self.removeAnimate()
     }
@@ -78,16 +83,17 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
     }
     
     // function to initiate checked array based on the stem input list count
-    func initiatCheckedArray(stemNumber:Int) {
-        let checkedArray = [Bool](repeating:false, count:stemNumber)
-        self.checkedStemList = checkedArray
-        //print("checked array initiated as: \(checkedArray)")
+    func initializePopUpVCVariables(delegate: speakerPairingViewController, inputStems:[String], speakerID:String, currentSelection:[Bool]) {
+        self.delegate = delegate
+        self.inputStemList = inputStems
+        self.selectedSpeaker = speakerID
+        self.checkedStemList = currentSelection
+        //print(delegate, inputStems, speakerID, currentSelection)
     }
     
     // MARK: TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if self.inputStemList.count > 0{
-            initiatCheckedArray(stemNumber: self.inputStemList.count)
             return inputStemList.count
         } else {
             return 0
@@ -105,6 +111,7 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = self.popUpStemTable.cellForRow(at: indexPath){
+
             //handle checked and unchecked cells
             if cell.accessoryType == .none {
                 cell.accessoryType = .checkmark
@@ -118,7 +125,28 @@ class popUpViewController: UIViewController, UITableViewDataSource, UITableViewD
         }
     }
  
- 
+    
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
+        if let cell = self.popUpStemTable.cellForRow(at: indexPath){
+            if self.checkedStemList[indexPath.row] {
+                cell.accessoryType = .checkmark
+                
+            }
+        }
+        return indexPath
+        
+    }
+ /*
+    
+    func tableView(_ tableView: UITableView, willBeginEditingRowAt indexPath: IndexPath) {
+        if let cell = self.popUpStemTable.cellForRow(at: indexPath){
+            if self.checkedStemList[indexPath.row] {
+                cell.accessoryType = .checkmark
+                
+            }
+        }
+    }
+    */
     /*
     // MARK: - Navigation
 
