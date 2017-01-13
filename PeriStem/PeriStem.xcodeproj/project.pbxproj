@@ -15,6 +15,7 @@
 		DD387D361DC3D47900861326 /* StemTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD387D351DC3D47900861326 /* StemTableViewController.swift */; };
 		DD39248B1E1A114A008D3E69 /* piano.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = DD39248A1E1A114A008D3E69 /* piano.mp3 */; };
 		DD3924911E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */; };
+		DDBA89031E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA89021E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift */; };
 		DDBCCD2E1DEBDF5600E540EE /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */; };
 		DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */; };
 		DDECBC4A1DC36EBE00414FC8 /* PeriStem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC481DC36EBE00414FC8 /* PeriStem.xcdatamodeld */; };
@@ -33,6 +34,7 @@
 		DD387D351DC3D47900861326 /* StemTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StemTableViewController.swift; sourceTree = "<group>"; };
 		DD39248A1E1A114A008D3E69 /* piano.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = piano.mp3; sourceTree = "<group>"; };
 		DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TouchType_90_Rim_Dry01.wav; sourceTree = "<group>"; };
+		DDBA89021E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsLibraryTableViewController.swift; sourceTree = "<group>"; };
 		DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
 		DDECBC431DC36EBE00414FC8 /* PeriStem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeriStem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,6 +79,7 @@
 				DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */,
 				DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */,
 				DDECBC4F1DC36EBE00414FC8 /* Main.storyboard */,
+				DDBA89021E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift */,
 				DD0E52341E21874E00220E8D /* popUpViewController.swift */,
 				DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */,
 				DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */,
@@ -170,6 +173,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDBA89031E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift in Sources */,
 				DDECBC4A1DC36EBE00414FC8 /* PeriStem.xcdatamodeld in Sources */,
 				DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */,
 				DDECBC4C1DC36EBE00414FC8 /* MasterViewController.swift in Sources */,
