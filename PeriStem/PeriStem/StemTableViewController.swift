@@ -130,8 +130,8 @@ class StemTableViewController: UITableViewController {
 
     
     override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
-        stemInPlayer = self.stems[stemList[indexPath.row]]!
-        print("will select \(stemInPlayer)")
+        //stemInPlayer = self.stems[stemList[indexPath.row]]!
+        //print("will select \(stemInPlayer)")
         return indexPath
     }
     

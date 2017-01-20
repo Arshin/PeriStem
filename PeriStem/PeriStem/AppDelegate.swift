@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  PeriStem
 //
-//  Created by Sogol Moezzi on 2016-10-28.
+//  Created by Arash Ashtiani on 2016-10-28.
 //  Copyright © 2016 ArashAsh. All rights reserved.
 //
 
@@ -12,30 +12,59 @@ import CoreData
 @UIApplicationMain
 
 //class AppDelegate: UIResponder, UIApplicationDelegate, UISplitViewControllerDelegate { // turned off for tabbed view
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegate {
     
     var window: UIWindow?
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
+        // SPLITVIEW CONTROLLER
+        
         /* turnned off for tabbed view
         // Override point for customization after application launch.
-        let splitViewController = self.window!.rootViewController as! UITableViewController
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
         let navigationController = splitViewController.viewControllers[splitViewController.viewControllers.count-1] as! UINavigationController
         navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
         splitViewController.delegate = self
 
-        let masterNavigationController = splitViewController.viewControllers[0] as! UINavigationController
+        let masterNavigationController = splitViewController.viewControllers[0].viewC as! UINavigationController
  
         let controller = masterNavigationController.topViewController as! MasterViewController
         controller.managedObjectContext = self.persistentContainer.viewContext
-        */
+ */
+        
         
         let tabBarController = self.window!.rootViewController as! UITabBarController
-        let songsLibraryVC = tabBarController.viewControllers?[0] as! SongsLibraryTableViewController
+        tabBarController.delegate=self
+        let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
+        let navC2 = tabBarController.viewControllers?[1] as! UINavigationController
+        let songsLibraryVC = navigationController.viewControllers[0] as! SongsLibraryTableViewController
+        let stemPC = navC2.viewControllers[0] as! stemPlayerClass
         songsLibraryVC.managedObjectContext = self.persistentContainer.viewContext
         
+        
+        
+        // tabbar with nav controller NOT COMPLETE!
+        
+        /*
+        let splitViewController = self.window!.rootViewController as! UISplitViewController
+        
+        let songLibTabBarController = splitViewController.viewControllers[0] as! UITabBarController
+        
+        let navigationController = songLibTabBarController.viewControllers?[0] as! UINavigationController
+        
+        navigationController.topViewController!.navigationItem.leftBarButtonItem = splitViewController.displayModeButtonItem
+        
+        splitViewController.delegate = self
+        
+        let masterNavigationController = songLibTabBarController.viewControllers?[0] as! UINavigationController
+        
+        let controller = masterNavigationController.topViewController as! MasterViewController
+        
+        // set managedObjectContext for the NSFetchedResultsController
+        controller.managedObjectContext = self.persistentContainer.viewContext
+        */
         return true
     }
 

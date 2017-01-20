@@ -6,14 +6,74 @@
 //  Copyright © 2017 ArashAsh. All rights reserved.
 //
 
+
 import UIKit
 import CoreData
 
-var stemInPlayer:String? = nil // this is the name of the stem selected, to be removed in near future
-var stemDictSelected = Dictionary<String,Any>() // this is the dictionary of the selected song
-var stemListforSongs = [Dictionary<String, String>()] // this list is coming form database, eventually
 
-class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsControllerDelegate {
+//var stemInPlayer:String? = nil // this is the name of the stem selected, to be removed in near future
+var stemDictSelected = Dictionary<String,Any>() // this is the dictionary of the selected song
+var stemListforSongs = [Dictionary<String, String>()] // this list is coming form database, eventually, this is the input
+
+/*
+var inputStemList = ["Cell1", "Cell2", "Cell3"]
+
+class SongLibraryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
+    
+    @IBOutlet var songsTableView: UITableView!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        //let parent  = self.parent?.view as! UITableViewController
+        //let parentViewControllerSpeakerDict = (self.parent as! StemTableViewController).speakerDict
+        
+        // Do any additional setup after loading the view.
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    
+    // MARK: TableView
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if inputStemList.count > 0{
+            return inputStemList.count
+        } else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        cell.textLabel?.text = inputStemList[indexPath.row]
+        cell.accessoryType = .none //set cell defualt state as unchecked
+        return cell
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "Song Library"
+        
+    }
+    
+    // MARK Manual Segue, sellected cell shows the player
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        var tabSwitchTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(switchToPlayerTab), userInfo: nil, repeats: false)
+    }
+    
+    func switchToPlayerTab(){
+        // player tab should always be the last tab
+        self.tabBarController?.selectedIndex = (self.tabBarController?.viewControllers?.count)! - 1
+    }
+    
+    
+}
+*/
+class SongsLibraryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     var speakerPairingViewController: speakerPairingViewController? = nil
     
@@ -22,6 +82,10 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
     
     var fetchedDict = Dictionary<String, Dictionary<String, Any>>()
     
+    @IBOutlet var songsTableView: UITableView!
+    
+    // initialize stemPlayerClass attribute place holder
+    var stemPC: stemPlayerClass? = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +118,26 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
  let controllers = split.viewControllers
  self.speakerPairingViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? speakerPairingViewController
  */
+        // manual segue link
+        if self.tabBarController != nil {
+            let navVC = self.tabBarController?.viewControllers?[1] as! UINavigationController
+            self.stemPC = navVC.viewControllers[0] as? stemPlayerClass
+        }
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    
+    override func viewWillAppear(_ animated: Bool) {
+        navigationItem.title = "Song Library"
+        
+    }
+    
     func clearCoreData(){
         // delete everything in the core data
         let appDelegate:AppDelegate = UIApplication.shared.delegate as! AppDelegate
@@ -201,15 +278,18 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
     var _fetchedResultsController: NSFetchedResultsController<Song>? = nil
 
     func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.beginUpdates()
+        //self.tableView.beginUpdates()
+        self.songsTableView.beginUpdates()
     }
     
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange sectionInfo: NSFetchedResultsSectionInfo, atSectionIndex sectionIndex: Int, for type: NSFetchedResultsChangeType) {
         switch type {
         case .insert:
-            self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+            //self.tableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
+            self.songsTableView.insertSections(IndexSet(integer: sectionIndex), with: .fade)
         case .delete:
-            self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+            //self.tableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
+            self.songsTableView.deleteSections(IndexSet(integer: sectionIndex), with: .fade)
         default:
             return
         }
@@ -218,44 +298,54 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
     func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
         switch type {
         case .insert:
-            tableView.insertRows(at: [newIndexPath!], with: .fade)
+            //tableView.insertRows(at: [newIndexPath!], with: .fade)
+            self.songsTableView.insertRows(at: [newIndexPath!], with: .fade)
         case .delete:
-            tableView.deleteRows(at: [indexPath!], with: .fade)
+            //tableView.deleteRows(at: [indexPath!], with: .fade)
+            self.songsTableView.deleteRows(at: [indexPath!], with: .fade)
         case .update:
-            self.configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Song)
+            //self.configureCell(tableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Song)
+            self.configureCell(self.songsTableView.cellForRow(at: indexPath!)!, withEvent: anObject as! Song)
         case .move:
-            tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            //tableView.moveRow(at: indexPath!, to: newIndexPath!)
+            self.songsTableView.moveRow(at: indexPath!, to: newIndexPath!)
         }
     }
     
     func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        self.tableView.endUpdates()
+        //self.tableView.endUpdates()
+        self.songsTableView.endUpdates()
     }
     // MARK: - Table View
-    
+    /*
     override func numberOfSections(in tableView: UITableView) -> Int {
         return self.fetchedResultsController.sections?.count ?? 0
     }
+    
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let sectionInfo = self.fetchedResultsController.sections![section]
         return sectionInfo.numberOfObjects
     }
+    */
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let sectionInfo = self.fetchedResultsController.sections![section]
+        return sectionInfo.numberOfObjects
+    }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         let event = self.fetchedResultsController.object(at: indexPath)
         self.configureCell(cell, withEvent: event)
         return cell
-        
     }
-    
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // Return false if you do not want the specified item to be editable.
         return true
     }
     
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
             let context = self.fetchedResultsController.managedObjectContext
             context.delete(self.fetchedResultsController.object(at: indexPath))
@@ -280,7 +370,60 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
     }
     
     
+    // MARK Manual Segue, sellected cell shows the player
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
 
+        if let cell = tableView.cellForRow(at: indexPath){
+            if self.stemPC != nil {
+                let selectedSong = cell.textLabel?.text!
+                self.stemPC!.preparePlayerForNewSong(selectedDict: self.fetchedDict[selectedSong!]!)
+            /*
+            //prepare player with the selected song
+            let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempVC") as! stemPlayerClass
+            UIStoryboard(name: "Main", bundle: nil).acc
+            print(popUpVC)
+            popUpVC.initializeVCVariables(delegate: self)
+            //popUpVC.preparePlayerForNewSong(selectedDict: self.fetchedDict[selectedSong!]!)
+            popUpVC.preparePlayerForNewSong()
+             */
+            }
+        }
+        
+        var tabSwitchTimer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(switchToPlayerTab), userInfo: nil, repeats: false)
+        
+        
+        //stemDictSelected = self.fetchedDict
+    }
+     
+    
+    func switchToPlayerTab(){
+        // player tab should always be the last tab
+        self.tabBarController?.selectedIndex = (self.tabBarController?.viewControllers?.count)! - 1
+        //let popUpVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "tempVC") as! tempStemPlayerViewController
+        //popUpVC.printStem(stem: self.fetchedDict)
+    }
+    
+    func tempViewControllerDidSelect(speakerID: String, selection: [Bool])  {
+        //print("this is from the popup: ", speakerID)
+        //self.speakerDict[speakerID] = selection // selection from the popup is saved
+    }
+
+    
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+    /*
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showPlayer"{
+            print("here")
+            navigationItem.title = "Pizza to One"
+            navigationItem.leftItemsSupplementBackButton = true
+        }
+     }
+ */
+    
     /*
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
@@ -326,14 +469,7 @@ class SongsLibraryTableViewController: UITableViewController, NSFetchedResultsCo
     }
     */
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
+

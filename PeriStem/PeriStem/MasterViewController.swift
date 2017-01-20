@@ -42,9 +42,19 @@ class MasterViewController: UITableViewController, NSFetchedResultsControllerDel
         self.fetchedDict = fetchSongsFromCoreData()
         //print("fetched Dic: ", self.fetchedDict.count)
         
+        
         if let split = self.splitViewController {
-            let controllers = split.viewControllers
-            self.speakerPairingViewController = (controllers[controllers.count-1] as! UINavigationController).topViewController as? speakerPairingViewController
+            print(split.childViewControllers)
+        
+            
+            //let storyboard = UIStoryboard(name: "Main", bundle: nil)
+            
+            
+            //let songVC = songtabBarController.viewControllers[0] as! UITabBarController
+            //let controller = songVC.viewControllers?[0] as! UINavigationController
+            //print("controller is", controller.splitViewController?.viewControllers[1])
+            //let controller = navigationController.topViewController
+            //self.speakerPairingViewController = controller.topViewController as? speakerPairingViewController
         }
     }
     

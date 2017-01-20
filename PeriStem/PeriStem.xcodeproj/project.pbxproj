@@ -17,6 +17,8 @@
 		DD3924911E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav in Resources */ = {isa = PBXBuildFile; fileRef = DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */; };
 		DDBA89031E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBA89021E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift */; };
 		DDBCCD2E1DEBDF5600E540EE /* PlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */; };
+		DDD44EAE1E2DD8C300B878D5 /* tempStemPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD44EAD1E2DD8C300B878D5 /* tempStemPlayerViewController.swift */; };
+		DDD44EB01E308A5C00B878D5 /* stemPlayerClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDD44EAF1E308A5C00B878D5 /* stemPlayerClass.swift */; };
 		DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */; };
 		DDECBC4A1DC36EBE00414FC8 /* PeriStem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC481DC36EBE00414FC8 /* PeriStem.xcdatamodeld */; };
 		DDECBC4C1DC36EBE00414FC8 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDECBC4B1DC36EBE00414FC8 /* MasterViewController.swift */; };
@@ -36,6 +38,8 @@
 		DD3924901E1AFCB9008D3E69 /* TouchType_90_Rim_Dry01.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = TouchType_90_Rim_Dry01.wav; sourceTree = "<group>"; };
 		DDBA89021E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongsLibraryTableViewController.swift; sourceTree = "<group>"; };
 		DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlayerClass.swift; sourceTree = "<group>"; };
+		DDD44EAD1E2DD8C300B878D5 /* tempStemPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tempStemPlayerViewController.swift; sourceTree = "<group>"; };
+		DDD44EAF1E308A5C00B878D5 /* stemPlayerClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stemPlayerClass.swift; sourceTree = "<group>"; };
 		DDECBC431DC36EBE00414FC8 /* PeriStem.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PeriStem.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDECBC461DC36EBE00414FC8 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DDECBC491DC36EBE00414FC8 /* PeriStem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PeriStem.xcdatamodel; sourceTree = "<group>"; };
@@ -83,6 +87,8 @@
 				DD0E52341E21874E00220E8D /* popUpViewController.swift */,
 				DD0E52301E1DA17C00220E8D /* costumTableViewCell.swift */,
 				DDBCCD2D1DEBDF5600E540EE /* PlayerClass.swift */,
+				DDD44EAF1E308A5C00B878D5 /* stemPlayerClass.swift */,
+				DDD44EAD1E2DD8C300B878D5 /* tempStemPlayerViewController.swift */,
 				DD387D351DC3D47900861326 /* StemTableViewController.swift */,
 				DD0D94691E234D62004C4B0D /* speakerPairingViewController.swift */,
 				DDECBC521DC36EBE00414FC8 /* Assets.xcassets */,
@@ -173,6 +179,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DDD44EB01E308A5C00B878D5 /* stemPlayerClass.swift in Sources */,
+				DDD44EAE1E2DD8C300B878D5 /* tempStemPlayerViewController.swift in Sources */,
 				DDBA89031E26C34A00C6CDE6 /* SongsLibraryTableViewController.swift in Sources */,
 				DDECBC4A1DC36EBE00414FC8 /* PeriStem.xcdatamodeld in Sources */,
 				DDECBC471DC36EBE00414FC8 /* AppDelegate.swift in Sources */,

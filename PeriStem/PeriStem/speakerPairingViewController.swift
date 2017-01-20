@@ -134,8 +134,8 @@ class speakerPairingViewController: UIViewController, UITableViewDataSource, UIT
 
     @IBAction func goToPlayerHandler(_ sender: Any) {
         //stemInPlayer = self.stems[stemList[indexPath.row]]!
-        stemInPlayer = self.stems[stemList[0]]! // should change to the collection of stems selected
-        print("will select \(stemInPlayer)")
+        //stemInPlayer = self.stems[stemList[0]]! // should change to the collection of stems selected
+        //print("will select \(stemInPlayer)")
     }
     
     func popUpViewControllerDidSelect(speakerID: String, selection: [Bool])  {

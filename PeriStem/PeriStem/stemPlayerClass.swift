@@ -1,16 +1,22 @@
 //
-//  PlayerClass.swift
+//  stemPlayerClass.swift
 //  PeriStem
 //
-//  Created by Arash Ashtiani on 2016-11-27.
-//  Copyright © 2016 ArashAsh. All rights reserved.
+//  Created by Sogol Moezzi on 2017-01-18.
+//  Copyright © 2017 ArashAsh. All rights reserved.
 //
 
 import UIKit
 import AVFoundation
 
-class PlayerClass: UIViewController {
-    
+protocol stemPlayerClassViewControllerDelegate {
+    func stemPlayerClassViewControllerDidSelect(value: String)
+}
+
+class stemPlayerClass: UIViewController {
+    var newSongSelected: Bool = false
+    // set parent view controller
+    var delegate: SongsLibraryTableViewController?
     var player:AVAudioPlayer = AVAudioPlayer()
     var audioURL:URL? = nil
     var playing:Bool = false
@@ -19,12 +25,12 @@ class PlayerClass: UIViewController {
     var stemList = [String]()
     var stemInPlayer = String()
     
+    @IBOutlet var stemLabel: UILabel!
+    
     @IBOutlet var songImageView: UIImageView!
     
     @IBOutlet var songBackgroundImageView: UIImageView!
     
-    @IBOutlet var StemLabel: UILabel!
-
     @IBOutlet var scrubSlider: UISlider!
     
     @IBAction func scrub(_ sender: Any) {
@@ -32,15 +38,12 @@ class PlayerClass: UIViewController {
     }
     
     @IBOutlet var volumeSlider: UISlider!
-
     
     @IBAction func changeVolume(_ sender: Any) {
         player.volume = volumeSlider.value
     }
     
     @IBOutlet var playButton: UIButton!
-
-    @IBOutlet var label: UILabel!
     
     @IBAction func playButton(_ sender: Any) {
         if self.playing != true{
@@ -56,19 +59,13 @@ class PlayerClass: UIViewController {
         }
     }
     
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
-        
+
+        // Do any additional setup after loading the view.
     }
 
-    //override func viewWillAppear(_ animated: Bool) {
-        //if stemInPlayer != nil{
-            //prepareNewSong()
-        //}
-    //}
-    
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -78,10 +75,18 @@ class PlayerClass: UIViewController {
         scrubSlider.value = Float(player.currentTime)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if newSongSelected{
+            //stemLabel.text = self.stemInPlayer
+            self.prepareNewSong()
+        }
+        newSongSelected = false
+    }
+    
     func prepareNewSong(){
         
-        // update somg label
-        label.text = self.stemInPlayer
+        // update song label
+        stemLabel.text = self.stemInPlayer
         
         // extract file info
         let fileToPlay:NSString = self.stemInPlayer as NSString
@@ -93,10 +98,20 @@ class PlayerClass: UIViewController {
         //let audioPath = Bundle.main.url(forResource: "piano", withExtension: "mp3")
         //print("audio path is: \(audioURL)")
         // load audion url into player
+
+        // set image for the album
+        //print("image should be \(stemDictSelected["image"]!)")
+        songImageView.image = UIImage(named: self.selectedSongDict["image"]! as! String)
+        songBackgroundImageView.image = UIImage(named: self.selectedSongDict["image"]! as! String)
         
+        //print("URL: ", self.audioURL!)
+        self.player = AVAudioPlayer()
         do {
             try player = AVAudioPlayer(contentsOf: self.audioURL!)
-        }catch{}
+        }catch{
+            print("Some error with setting up the AVAudioPlayer")
+        }
+        
         
         // update scrub slider as song plays
         var timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateScrubSlider), userInfo: nil, repeats: true)
@@ -104,32 +119,34 @@ class PlayerClass: UIViewController {
         // update scruber maximum value
         scrubSlider.maximumValue = Float(player.duration)
         
-        // set image for the album
-        //print("image should be \(stemDictSelected["image"]!)")
-        songImageView.image = UIImage(named: self.selectedSongDict["image"]! as! String)
-        songBackgroundImageView.image = UIImage(named: self.selectedSongDict["image"]! as! String)
-        }
+
+    }
+    
     
     func preparePlayerForNewSong(selectedDict:Dictionary<String, Any>){
         self.selectedSongDict =  selectedDict
-        print("this is the selected song dict", self.selectedSongDict)
-        
+        print("here")
+        newSongSelected = true
+        print("newsongselected",newSongSelected)
         if selectedDict.count > 0 {
             self.stems = selectedSongDict["stemDict"] as! Dictionary<String, String>
             
             for key in self.stems.keys {
                 self.stemList.append(key)
             }
-            //self.stemInPlayer = self.stems[self.stemList[0]]!
-            self.stemInPlayer = "piano.mp3"
-            print(self.stems)
-            print(self.stemList)
+            self.stemInPlayer = self.stems[self.stemList[0]]!
+            //self.stemInPlayer = "piano.mp3"
             print("selected \(self.stemInPlayer)")
-            self.prepareNewSong()
-            //StemLabel!.text! = "Hey"
             
         }
- 
+    }
+    
+    func initializeVCVariables(delegate: SongsLibraryTableViewController) {
+        self.delegate = delegate
+        //self.inputStemList = inputStems
+        //self.selectedSpeaker = speakerID
+        //self.checkedStemList = currentSelection
+        //print(delegate, inputStems, speakerID, currentSelection)
     }
     /*
     // MARK: - Navigation
