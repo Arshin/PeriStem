@@ -283,10 +283,10 @@
             </objects>
             <point key="canvasLocation" x="-2258" y="761"/>
         </scene>
-        <!--songLibraryVC-->
+        <!--Library-->
         <scene sceneID="MF0-zM-IAS">
             <objects>
-                <viewController title="songLibraryVC" id="D0y-Lf-LgW" customClass="SongsLibraryTableViewController" customModule="PeriStem" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController title="Library" id="D0y-Lf-LgW" customClass="SongsLibraryTableViewController" customModule="PeriStem" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="67i-d5-7KC"/>
                         <viewControllerLayoutGuide type="bottom" id="uGe-b6-Fc1"/>
@@ -399,15 +399,46 @@
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qZh-jU-BCh">
                                 <rect key="frame" x="-1" y="306" width="375" height="74"/>
-                                <color key="backgroundColor" red="0.55326915580000002" green="0.84819121980000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="74" id="hk9-S5-fEn"/>
                                     <constraint firstAttribute="width" constant="375" id="ysb-O1-Oji"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7Ru-c9-KZg">
+                                <rect key="frame" x="-1" y="510" width="89" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7NO-Fx-DlE">
+                                <rect key="frame" x="87" y="510" width="89" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QiB-tD-K0L">
+                                <rect key="frame" x="176" y="510" width="89" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qMt-XQ-G0k">
+                                <rect key="frame" x="264" y="510" width="89" height="108"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <state key="normal" title="Button">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -481,11 +512,11 @@
             </objects>
             <point key="canvasLocation" x="-39.200000000000003" y="-630.13493253373315"/>
         </scene>
-        <!--Item-->
+        <!--Library-->
         <scene sceneID="Mgv-8X-TxF">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8bU-iE-Rkn" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item" id="VhG-hv-a4l"/>
+                <navigationController title="Library" automaticallyAdjustsScrollViewInsets="NO" id="8bU-iE-Rkn" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Library" id="VhG-hv-a4l"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="BAz-Qs-fPr">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>

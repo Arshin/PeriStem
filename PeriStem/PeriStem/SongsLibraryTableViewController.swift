@@ -14,65 +14,9 @@ import CoreData
 //var stemInPlayer:String? = nil // this is the name of the stem selected, to be removed in near future
 var stemDictSelected = Dictionary<String,Any>() // this is the dictionary of the selected song
 var stemListforSongs = [Dictionary<String, String>()] // this list is coming form database, eventually, this is the input
+var viewWidth:NSInteger = 0 // This is device width in px which will be used to format speaker buttons on stemPlayerClass
+var numberOfSpeakers = 4 // this is total number of connected speakers, eventually app should automatically search for this.
 
-/*
-var inputStemList = ["Cell1", "Cell2", "Cell3"]
-
-class SongLibraryTableViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
-    
-    @IBOutlet var songsTableView: UITableView!
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-        //let parent  = self.parent?.view as! UITableViewController
-        //let parentViewControllerSpeakerDict = (self.parent as! StemTableViewController).speakerDict
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-
-    
-    // MARK: TableView
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if inputStemList.count > 0{
-            return inputStemList.count
-        } else {
-            return 0
-        }
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
-        cell.textLabel?.text = inputStemList[indexPath.row]
-        cell.accessoryType = .none //set cell defualt state as unchecked
-        return cell
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        navigationItem.title = "Song Library"
-        
-    }
-    
-    // MARK Manual Segue, sellected cell shows the player
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        var tabSwitchTimer = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(switchToPlayerTab), userInfo: nil, repeats: false)
-    }
-    
-    func switchToPlayerTab(){
-        // player tab should always be the last tab
-        self.tabBarController?.selectedIndex = (self.tabBarController?.viewControllers?.count)! - 1
-    }
-    
-    
-}
-*/
 class SongsLibraryTableViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, NSFetchedResultsControllerDelegate {
 
     var speakerPairingViewController: speakerPairingViewController? = nil
@@ -99,7 +43,7 @@ class SongsLibraryTableViewController: UIViewController, UITableViewDelegate, UI
         // add songs to the list, in future this is read form the user music library
         stemListforSongs.remove(at: 0) //remove the dummy object
         stemListforSongs.append(["name":"Oddity","Guitar":"TouchType_90_Rim_Dry01.wav", "Strings":"piano.mp3", "Piano": "piano.mp3", "artist":"David", "image":"spaceoddity.jpeg"])
-        stemListforSongs.append(["name":"Space","Acoustic Guitar":"TouchType_90_Rim_Dry01.wav", "Lead Vocal":"11 Space Oddity (Lead Vocal).m4p", "artist":"Bowie", "image":"pianoImage.jpg"])
+        stemListforSongs.append(["name":"Space","Acoustic Guitar":"TouchType_90_Rim_Dry01.wav", "Lead Vocal":"piano.mp3", "artist":"Bowie", "image":"pianoImage.jpg"])
         
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -122,6 +66,8 @@ class SongsLibraryTableViewController: UIViewController, UITableViewDelegate, UI
         if self.tabBarController != nil {
             let navVC = self.tabBarController?.viewControllers?[1] as! UINavigationController
             self.stemPC = navVC.viewControllers[0] as? stemPlayerClass
+            viewWidth = NSInteger((self.tabBarController?.view.frame.width)!)
+            print("device width is: \(viewWidth)")
         }
     }
     
@@ -374,7 +320,6 @@ class SongsLibraryTableViewController: UIViewController, UITableViewDelegate, UI
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-
         if let cell = tableView.cellForRow(at: indexPath){
             if self.stemPC != nil {
                 let selectedSong = cell.textLabel?.text!

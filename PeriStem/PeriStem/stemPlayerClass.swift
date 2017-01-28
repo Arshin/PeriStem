@@ -127,13 +127,19 @@ class stemPlayerClass: UIViewController {
         self.selectedSongDict =  selectedDict
         print("here")
         newSongSelected = true
-        print("newsongselected",newSongSelected)
+        print("selected dict is",selectedDict["stemDict"]!)
         if selectedDict.count > 0 {
+            
+            if newSongSelected{
+                // reseting the self.stems list
+                self.stemList = [String]()
+            }
             self.stems = selectedSongDict["stemDict"] as! Dictionary<String, String>
             
             for key in self.stems.keys {
                 self.stemList.append(key)
             }
+            print("here is the stem list: ",self.stemList)
             self.stemInPlayer = self.stems[self.stemList[0]]!
             //self.stemInPlayer = "piano.mp3"
             print("selected \(self.stemInPlayer)")

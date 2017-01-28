@@ -36,6 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UITabBarControllerDelegat
         
         
         let tabBarController = self.window!.rootViewController as! UITabBarController
+
         tabBarController.delegate=self
         let navigationController = tabBarController.viewControllers?[0] as! UINavigationController
         let navC2 = tabBarController.viewControllers?[1] as! UINavigationController
